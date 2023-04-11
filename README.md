@@ -18,7 +18,7 @@ npm start
 3. Send the musicians as a JSON Response (`response.json()`).
 4. Test your endpoint by visiting http://localhost:3000/musicians. Your browser should output the following:
 
-![image (1)](https://user-images.githubusercontent.com/44912347/202537821-d61a2f71-b243-477e-8a88-f9705c8a1dc4.png)
+![Part 1 End Image](./assets/Part1.png)
 
 ## Part 2: Route Parameters
 1. In the `server.js` file, create an express `GET` request to an endpoint for `/musicians`.

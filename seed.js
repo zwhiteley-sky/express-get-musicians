@@ -1,5 +1,5 @@
-const {Musician} = require("./Musician")
-const {sequelize} = require("./db");
+const { Musician } = require("./models/Musician")
+const { sequelize } = require("./db");
 const seedMusician = require("./seedData");
 
 const syncSeed = async () => {

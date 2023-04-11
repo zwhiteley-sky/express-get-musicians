@@ -1,6 +1,6 @@
 const seedMusician = [
     {
-      name: 'Steven Tyler',
+      name: 'Mick Jagger',
       instrument: 'Voice'
     },
     {
