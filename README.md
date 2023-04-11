@@ -54,13 +54,17 @@ npm start
     ```
 
 ## Part 2: Route Parameters
-1. In the `server.js` file, create an express `GET` request to an endpoint for `/musicians`.
-2. Include a route parameter of id as part of your `/musicians` endpoint.
-3. The endpoint will need to fetch a musician from the database, based on the Router Parameters value - have a look at the Sequelize Model's `findByPk()` method to help you with this. 
-4. Create a response as a JSON object for the referenced musician object that was found in the database.
-5. Test your endpoint using Postman: http://localhost:3000/musicians/1. Your browser should output the following:
+In `src/app.js`:
+1. Use Express to create `GET /musicians/:id` endpoint.
+2. In `GET /musicians/:id` get the id using the `req.params` object.
+3. In `GET /musicians/:id` get the particular restaurant via the method `findByPk()`.
+4. Send the found restaurant as a JSON response (`res.json()`).
+5. Start your server with `node server.js`
+6. Test your endpoint using Postman or your browser by sending a GET request to http://localhost:3000/musicians/1. Your browser should output the following on Postman:
 
-![image (3)](https://user-images.githubusercontent.com/44912347/202540881-8e27d52f-51a2-49e7-ad4c-c68523ff03d1.png)
+![GET musicians/1 endpoint](./assets/Part2.png)
+
+7. In `index.test.js`, create tests for this new endpoint.
 
 ## Part 3: `POST`, `PUT`, and `DELETE` Musicians
 1. In the `server.js` file, include necessary middleware for parsing data provided in the request of the body.
