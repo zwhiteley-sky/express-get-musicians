@@ -13,12 +13,45 @@ npm start
 ```
 
 ## Part 1: `GET` Musicians
-1. In the `server.js` file, create a new endpoint for when the browser makes a `GET` request to http://localhost:3000/musicians.
-2. The endpoint will need to fetch these musicians from the database. Have a look at the Sequelize Model's `findAll()` method from last week to help you with this. 
+1. Create a `GET /musicians` route for app with `req` and `res` parameters.
+2. Get all musicians via the `Musician.findAll()` method within the route.
+    - Remember to use `async` and `await`
+    - Note that you only need to run `npm run seed` once in order to put data into the musician database.
 3. Send the musicians as a JSON Response (`response.json()`).
-4. Test your endpoint by visiting http://localhost:3000/musicians. Your browser should output the following:
+4. Start your server with node server.js.
+5. Test your endpoint by visiting http://localhost:3000/musicians. Your browser should output the following:
 
 ![Part 1 End Image](./assets/Part1.png)
+
+6. In `index.test.js`, create tests to verify that your `GET /musicians` endpoint is returning the desired information. A few useful tips to aid your unit test creation:
+    - The response to an endpoint can be accessed using the `supertest` package. You will need to require this in your testing file.
+    ```javascript
+    const request = require("supertest");
+    ```
+    - You can send a request using the `.get()` method
+    ```javascript
+    test("Testing bakedGoods endpoint", async () => {
+        // Sends request to `/bakedGoods` endpoint
+        const response = await request(app).get("/bakedGoods");
+    })
+    ```
+    - A HTTP status code of 200 indicates a successful GET request was made. We can access a status code using the `response.statusCode` method.
+    ```javascript
+    test("Testing bakedGoods endpoint", async () => {
+        // Sends request to `/bakedGoods` endpoint
+        const response = await request(app).get("/bakedGoods");
+        expect(response.statusCode).toBe(200);
+    })
+    ```
+    - When sending data from a database the response sends a JSON string. To convert this back to a JSON object where we can access values, we can use `JSON.parse()` on the text in the response.
+    ```javascript
+    test("Testing bakedGoods endpoint", async () => {
+        // Sends request to `/bakedGoods` endpoint
+        const response = await request(app).get("/bakedGoods");
+        const responseData = JSON.parse(response.text);
+        // Write expect tests here
+    })
+    ```
 
 ## Part 2: Route Parameters
 1. In the `server.js` file, create an express `GET` request to an endpoint for `/musicians`.
