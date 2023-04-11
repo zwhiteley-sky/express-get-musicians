@@ -67,11 +67,42 @@ In `src/app.js`:
 7. In `index.test.js`, create tests for this new endpoint.
 
 ## Part 3: `POST`, `PUT`, and `DELETE` Musicians
-1. In the `server.js` file, include necessary middleware for parsing data provided in the request of the body.
-2. Create an express route for creating (adding) a new restaurant on your musician database. For example, `/musicians` via a `POST` request would create a new database entry based on what is contained in the HTTP request body.
-3. Create an express route for updating (replacing) an existing musician with a new musician on your musician database based on ID. For example, `/musicans/2` would update the musician with an ID of 2 with the content in the HTTP request body.
-4. Create an express route for deleting (removing) a musician on your database. For example, `musicians/2` would delete the musician with an ID of 2 from the database.
-5. Test your endpoint using Postman and make sure to use the correct HTTP Verb when making your requests to your server.
+In `src/app.js`:
+1. Call `app.use()` and pass it `express.json()` so that we can parse the request body that contain JSON objects.
+2. Call `app.use()` and pass it `express.urlencoded()` so that we can parse the request body with urlencoded values.
+2. Create an Express route for creating (adding) a new musician on your musician database.
+3. Create an express route for updating (replacing) an existing musician with a new musician in your musician database based on ID in the route. 
+    - For example, `PUT musicians/2` would update the musician with an ID of 2.
+4. Create an express route for deleting (removing) a musician in your database based on the id in the route.
+    - For example, `POST musicians/2` would delete the musician with an ID of 2.
+5. Test  your endpoints on Postman by making a `GET`, `POST`, `PUT`, and `DELETE` requests to http://localhost:3000/musicians/
+6. In `index.test.js`, create tests for this new endpoint.
+
+### Sending HTTP Requests with Postman
+
+**`DELETE`**
+
+`DELETE` requests typically do not have a request body. To send these requests in Postman:
+
+1. Start the server using node server.js. 
+2. Copy the URL (something like https://localhost:3000/restaurants/1) into Postman. 
+3. Set the method to `DELETE`
+4. Send the request. 
+5. When you refresh the URL, you will see the value has been deleted.
+
+![Delete in Postman](./assets/Delete.png)
+
+**`PUT` and `POST`**
+
+Creating and updating values with `POST` and `PUT` requests requires that we send information in the body of the HTTP request. To send these requests in Postman:
+
+1. Set the method to `PUT` or `POST`
+2. In Postman, select Body and then "raw". 
+3. Paste the object into the body and ensure it is formatted correctly (i.e. JSON key values need to be in quotes).
+4. Send the request
+5. Refresh the page to see the updated array of values.
+
+![Put in Postman](./assets/PutPost.png)
 
 ## Part 4: Express Router
 1. Create a new directory for your express router(s).
