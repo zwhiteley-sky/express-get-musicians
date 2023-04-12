@@ -57,8 +57,8 @@ npm start
 In `src/app.js`:
 1. Use Express to create `GET /musicians/:id` endpoint.
 2. In `GET /musicians/:id` get the id using the `req.params` object.
-3. In `GET /musicians/:id` get the particular restaurant via the method `findByPk()`.
-4. Send the found restaurant as a JSON response (`res.json()`).
+3. In `GET /musicians/:id` get the particular musician via the method `findByPk()`.
+4. Send the found musician as a JSON response (`res.json()`).
 5. Start your server with `node server.js`
 6. Test your endpoint using Postman or your browser by sending a GET request to http://localhost:3000/musicians/1. Your browser should output the following on Postman:
 
@@ -85,7 +85,7 @@ In `src/app.js`:
 `DELETE` requests typically do not have a request body. To send these requests in Postman:
 
 1. Start the server using node server.js. 
-2. Copy the URL (something like https://localhost:3000/restaurants/1) into Postman. 
+2. Copy the URL (something like https://localhost:3000/musician/1) into Postman. 
 3. Set the method to `DELETE`
 4. Send the request. 
 5. When you refresh the URL, you will see the value has been deleted.
@@ -105,14 +105,15 @@ Creating and updating values with `POST` and `PUT` requests requires that we sen
 ![Put in Postman](./assets/PutPost.png)
 
 ## Part 4: Express Router
-1. Create a new directory for your express router(s).
-2. Include a file within that directory to represent your express router
-3. Define your express router to be able to handle creating, reading, updating, and deleting resources from your `Musicians` database
-3. Export your router
-4. Include a reference to your router in your main express server
-5. Use the express router in your main server
-6. Remove any pre-defined routes from your main server and use only your express router.
-7. Test your endpoints using Postman. Make sure to test a `GET`, `POST`, `PUT`, and `DELETE` endpoint.
+1. Create a new directory called `routes` for your Express router(s)
+2. Include a file (like `musicians.js`) within the `routes` directory to represent your Express router
+3. Define your Express router to be able to handle creating, reading, updating, and deleting resources from your `Musician` database.
+4. Export your musicians router
+5. Include a reference to your router in your main express server in `server.js`
+6. Use the Express router in your main server
+7. Remove any pre-defined routes from your main server and use only your Express router.
+8. Test your endpoints using Postman
+9. In `index.test.js`, create unit tests to test the functionality that you created above.
 
 ## Part 5: Server Side Validation
 1. Run `npm install express-validator` to install the Express Validator package
