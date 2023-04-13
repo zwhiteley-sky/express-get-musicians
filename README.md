@@ -104,6 +104,8 @@ Creating and updating values with `POST` and `PUT` requests requires that we sen
 
 ![Put in Postman](./assets/PutPost.png)
 
+6. In `index.test.js`, update the tests to reflect the functionality you created above.
+
 ## Part 4: Express Router
 1. Create a new directory called `routes` for your Express router(s)
 2. Include a file (like `musicians.js`) within the `routes` directory to represent your Express router
