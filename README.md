@@ -118,12 +118,36 @@ Creating and updating values with `POST` and `PUT` requests requires that we sen
 ## Part 5: Server Side Validation
 1. Run `npm install express-validator` to install the Express Validator package
 2. Include the `check` and `validationResult` methods from the Express Validator package in your Express Router for musicians.
-3. Navigate to your `POST` Request route to `/musicians` from your Express Router and include a parameter `[]` in between the endpoint and the callback function.
-4. Within the array `[]` include a first item which checks that the “name” field in the `request.body` is not empty and doesn’t only contain whitespace.
-5. Within the array `[]` include a second item that checks that the “instrument” in the `request.body` is not empty and doesn’t only contain whitespace.
+3. Navigate to your `POST` Request route to `/musicians` from your Express router and include a parameter `[]` in between the endpoint and the callback function.
+4. Within the array `[]` include a first item which checks that the `“name”` field in the `request.body` is not empty and doesn’t only contain whitespace.
+5. Within the array `[]` include a second item that checks that the `“instrument”` in the `request.body` is not empty and doesn’t only contain whitespace.
 6. Within the callback function, validate the results of your checks and store them in a variable named `errors`.
 7. Check that if the `errors` reference is not empty (there are errors), respond with a JSON that contains the key `error` and the value `errors.array()`.
 8. If the `errors` reference is empty (there are no errors), then continue with adding the musician to the `Musicians` DB and return a list of all the musicians including the newly added one.
 9. Test your endpoint using Postman. 
-    - Check to see if you can add a musician without a value in the “name” field.
-    - Check to see if you can add a musician without a value in the “instrument” field.
+    - Check to see if you can add a musician without a value in the `“name”` field.
+    - Check to see if you can add a musician without a value in the `“instrument”` field.
+10. In `index.test.js`, create unit tests that test that an errors array is returned when the `"name"` and/or `"instrument"` fields are empty.
+
+## Extension Problems 🚀
+
+### `Band` Association
+In addition to a `Musician` model, there is a `Band` model that is associated by the following relationship:
+- Every Musician has one `Band`, but a `Band` can have many `Musician` instances.
+
+1. In models/index.js, define the following association:
+    - Every `Musician` has one Band, but a `Band` can have many `Musician` instances.
+2. In your routes directory, define a `bands.js` route.
+3. Create a `GET /bands` endpoint that returns all the `Band` instances including the `Musician` instances that are part of that `Band`.
+4. Create a `GET /bands/:id` endpoint that returns the `Band` based on the ID passed into the request, and include the `Musician`(s) that are part of that particular `Band`. 
+5. Export your bands router.
+6. Include a reference to your router in your main express server in `app.js`.
+7. Use the Express router in your main server
+8. Test your route with Postman
+9. In `index.test.js`, create unit tests to test the functionality that you created above.
+
+### Additional Challenges
+1. Include the third item within your array [] that checks that the `"name"` field has a length between 2 and 20. (Minimum 2, Maximum 20). [Use this reference](https://github.com/validatorjs/validator.js#validators) to locate the best method for checking the length of the value passed into the musician’s `"name"` field.
+2. Include the fourth item within your array `[]` that checks that the `"instrument"` field has a length between 2 and 20. (Minimum 2, Maximum 20).
+3. Update the `PUT /musicians/:id` route with server side validation like you did for the `POST` route.
+4. In `index.test.js`, create tests that test the new functionality you created.
