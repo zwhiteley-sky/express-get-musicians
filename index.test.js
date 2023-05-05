@@ -4,9 +4,9 @@ execSync('npm install');
 execSync('npm run seed');
 
 const request = require("supertest")
-const { sequelize } = require('./db');
-const { Musician } = require('./models/Musician')
-const app = require('./app');
+const { db } = require('./db/connection');
+const { Musician } = require('./models/index')
+const app = require('./src/app');
 const seedMusician = require("./seedData");
 
 

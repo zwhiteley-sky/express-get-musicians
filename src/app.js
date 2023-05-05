@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const { Musician } = require("../models/Musician")
-const { sequelize } = require("../db")
+const { Musician } = require("../models/index")
+const { db } = require("../db/connection")
 
 const port = 3000;
 

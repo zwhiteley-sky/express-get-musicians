@@ -1,10 +1,8 @@
-const { Sequelize, sequelize } = require('../db');
+const { Sequelize, db } = require('../db/connection');
 
-let Band = sequelize.define('band', {
+let Band = db.define('band', {
     name: Sequelize.STRING,
     genre: Sequelize.STRING
 });
 
-module.exports = {
-    Band
-};
+module.exports = Band;

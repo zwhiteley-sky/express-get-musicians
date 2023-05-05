@@ -1,11 +1,11 @@
 const { Musician, Band } = require("./models/index")
-const { sequelize } = require("./db");
+const { db } = require("./db/connection");
 const { seedMusician, seedBand } = require("./seedData");
 
 const syncSeed = async () => {
-    await sequelize.sync({force: true});
+    await db.sync({force: true});
     seedMusician.map(musician => Musician.create(musician));
     seedBand.map(band => Band.create(band));
 }
 
-syncSeed()
+syncSeed();
