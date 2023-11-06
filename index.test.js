@@ -11,12 +11,17 @@ const seedMusician = require("./seedData");
 
 
 describe('./musicians endpoint', () => {
-    // Write your tests here
-    
-    
+    test("Testing musicians endpoint", async () => {
+        const response = await request(app).get("/musicians");
 
+        for (let i = 0; i < response.body.length; ++i) {
+            expect(response.body[i]).toMatchObject(seedMusician.seedMusician[i]);
+        }
+    });
 
+    test("Testing musicians/id endpoint", async () => {
+        const response = await request(app).get("/musicians/1");
 
-
-    
-})
+        expect(response.body).toMatchObject(seedMusician.seedMusician[0]);
+    });
+});
