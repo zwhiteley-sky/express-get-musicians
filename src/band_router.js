@@ -1,17 +1,21 @@
 const express = require("express");
-const { Band } = require("../models/index")
+const { Band, Musician } = require("../models/index")
 const { db } = require("../db/connection")
 const band_router = express.Router();
 
 band_router.get("/", async (req, res) => {
-    res.json(await Band.findAll());
+    res.json(await Band.findAll({
+        include: Musician
+    }));
 });
 
 band_router.get("/:id", async (req, res) => {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).send("invalid id");
 
-    const band = await Band.findByPk(id);
+    const band = await Band.findByPk(id, {
+        include: Musician
+    });
 
     if (band) res.json(band);
     else res.status(404).send("band not found");

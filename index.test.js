@@ -9,7 +9,6 @@ const { Musician } = require('./models/index')
 const app = require('./src/app');
 const seedMusician = require("./seedData");
 
-
 describe('./musicians endpoint', () => {
     test("Testing musicians endpoint", async () => {
         const response = await request(app).get("/musicians");

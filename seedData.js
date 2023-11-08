@@ -1,15 +1,18 @@
 const seedMusician = [
     {
       name: 'Mick Jagger',
-      instrument: 'Voice'
+      instrument: 'Voice',
+      bandId: 1
     },
     {
       name: 'Drake',
       instrument: 'Voice',
+      bandId: 1
     },
     {
       name: 'Jimi Hendrix',
-      instrument: 'Guitar'
+      instrument: 'Guitar',
+      bandId: 1
     }
 ]
 
