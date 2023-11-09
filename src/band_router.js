@@ -1,6 +1,8 @@
 const express = require("express");
 const { Band, Musician } = require("../models/index")
 const { db } = require("../db/connection")
+const { validate } = require("./validator");
+const { body, matchedData } = require("express-validator");
 const band_router = express.Router();
 
 band_router.get("/", async (req, res) => {
@@ -21,14 +23,34 @@ band_router.get("/:id", async (req, res) => {
     else res.status(404).send("band not found");
 });
 
-band_router.post("/", async (req, res) => {
+band_router.post("/", validate([
+    body("name")
+        .notEmpty({ ignore_whitespace: true })
+        .withMessage("name must not be empty")
+        .trim(),
+    body("genre")
+        .notEmpty({ ignore_whitespace: true })
+        .withMessage("genre must not be empty")
+        .trim()
+]), async (req, res) => {
     const { name, genre } = req.body;
 
     const band = await Band.create({ name, genre });
     res.json(band);
 });
 
-band_router.put("/:id", async (req, res) => {
+band_router.put("/:id", validate([
+    body("name")
+        .optional()
+        .notEmpty({ ignore_whitespace: true })
+        .withMessage("name must not be empty")
+        .trim(),
+    body("genre")
+        .optional()
+        .notEmpty({ ignore_whitespace: true })
+        .withMessage("genre must not be empty")
+        .trim()
+]), async (req, res) => {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).send("invalid id");
 

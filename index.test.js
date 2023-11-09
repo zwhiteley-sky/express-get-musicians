@@ -35,6 +35,24 @@ describe('./musicians endpoint', () => {
         expect(users.body.length).toBe(4);
     });
 
+    test("cannot create musician with empty name", async () => {
+        const response = await request(app)
+            .post("/musicians")
+            .send({ name: "    ", instrument: "Triangle" })
+            .expect(400);
+
+        expect(response.body.error[0].path).toBe("name");
+    });
+
+    test("cannot create musician with empty instrument", async () => {
+        const response = await request(app)
+            .post("/musicians")
+            .send({ name: "Zachary", instrument: "  " })
+            .expect(400);
+
+        expect(response.body.error[0].path).toBe("instrument");
+    });
+
     test("can update a musician", async () => {
         const response = await request(app)
             .put("/musicians/4")
@@ -44,6 +62,24 @@ describe('./musicians endpoint', () => {
 
         const user = await request(app).get("/musicians/4");
         expect(user.body).toMatchObject({ name: "Zach", instrument: "Triangle" });
+    });
+
+    test("cannot update musician with empty name", async () => {
+        const response = await request(app)
+            .put("/musicians/1")
+            .send({ name: "    " })
+            .expect(400);
+
+        expect(response.body.error[0].path).toBe("name");
+    });
+
+    test("cannot update musician with empty instrument", async () => {
+        const response = await request(app)
+            .put("/musicians/1")
+            .send({ instrument: "  " })
+            .expect(400);
+
+        expect(response.body.error[0].path).toBe("instrument");
     });
 
     test("can delete musician", async () => {
@@ -81,6 +117,24 @@ describe('./bands endpoint', () => {
         expect(users.body.length).toBe(4);
     });
 
+    test("cannot create band with empty name", async () => {
+        const response = await request(app)
+            .post("/bands")
+            .send({ name: "    ", genre: "Triangle" })
+            .expect(400);
+
+        expect(response.body.error[0].path).toBe("name");
+    });
+
+    test("cannot create band with empty genre", async () => {
+        const response = await request(app)
+            .post("/bands")
+            .send({ name: "Zachary", genre: "  " })
+            .expect(400);
+
+        expect(response.body.error[0].path).toBe("genre");
+    });
+
     test("can update a band", async () => {
         const response = await request(app)
             .put("/bands/4")
@@ -90,6 +144,24 @@ describe('./bands endpoint', () => {
 
         const user = await request(app).get("/bands/4");
         expect(user.body).toMatchObject({ name: "Zach", genre: "Triangle" });
+    });
+
+    test("cannot update band with empty name", async () => {
+        const response = await request(app)
+            .put("/bands/1")
+            .send({ name: "    " })
+            .expect(400);
+
+        expect(response.body.error[0].path).toBe("name");
+    });
+
+    test("cannot update band with empty genre", async () => {
+        const response = await request(app)
+            .put("/bands/1")
+            .send({ genre: "  " })
+            .expect(400);
+
+        expect(response.body.error[0].path).toBe("genre");
     });
 
     test("can delete band", async () => {

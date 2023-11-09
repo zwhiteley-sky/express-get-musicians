@@ -1,6 +1,8 @@
 const express = require("express");
 const { Musician } = require("../models/index")
 const { db } = require("../db/connection")
+const { validate } = require("./validator");
+const { body, matchedData } = require("express-validator");
 const music_router = express.Router();
 
 music_router.get("/", async (req, res) => {
@@ -17,14 +19,34 @@ music_router.get("/:id", async (req, res) => {
     else res.status(404).send("musician not found");
 });
 
-music_router.post("/", async (req, res) => {
+music_router.post("/", validate([
+    body("name")
+        .notEmpty({ ignore_whitespace: true })
+        .withMessage("name must not be empty")
+        .trim(),
+    body("instrument")
+        .notEmpty({ ignore_whitespace: true })
+        .withMessage("instrument must not be empty")
+        .trim(),
+]), async (req, res) => {
     const { name, instrument } = req.body;
 
     const music = await Musician.create({ name, instrument });
     res.json(music);
 });
 
-music_router.put("/:id", async (req, res) => {
+music_router.put("/:id", validate([
+    body("name")
+        .optional()
+        .notEmpty({ ignore_whitespace: true })
+        .withMessage("name must not be empty")
+        .trim(),
+    body("instrument")
+        .optional()
+        .notEmpty({ ignore_whitespace: true })
+        .withMessage("instrument must not be empty")
+        .trim(),
+]), async (req, res) => {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).send("invalid id");
 
