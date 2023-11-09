@@ -23,10 +23,14 @@ music_router.post("/", validate([
     body("name")
         .notEmpty({ ignore_whitespace: true })
         .withMessage("name must not be empty")
+        .isLength({ min: 2, max: 20 })
+        .withMessage("name must have between 2 and 20 characters")
         .trim(),
     body("instrument")
         .notEmpty({ ignore_whitespace: true })
         .withMessage("instrument must not be empty")
+        .isLength({ min: 2, max: 20 })
+        .withMessage("instrument must have between 2 and 20 characters")
         .trim(),
 ]), async (req, res) => {
     const { name, instrument } = req.body;
@@ -40,11 +44,15 @@ music_router.put("/:id", validate([
         .optional()
         .notEmpty({ ignore_whitespace: true })
         .withMessage("name must not be empty")
+        .isLength({ min: 2, max: 20 })
+        .withMessage("name must have between 2 and 20 characters")
         .trim(),
     body("instrument")
         .optional()
         .notEmpty({ ignore_whitespace: true })
         .withMessage("instrument must not be empty")
+        .isLength({ min: 2, max: 20 })
+        .withMessage("instrument must have between 2 and 20 characters")
         .trim(),
 ]), async (req, res) => {
     const id = Number(req.params.id);
