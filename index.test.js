@@ -53,6 +53,15 @@ describe('./musicians endpoint', () => {
         expect(response.body.error[0].path).toBe("instrument");
     });
 
+    test("cannot create musician with 1 character instrument", async () => {
+        const response = await request(app)
+            .post("/musicians")
+            .send({ name: "Zachary", instrument: "x" })
+            .expect(400);
+
+        expect(response.body.error[0].path).toBe("instrument");
+    });
+
     test("can update a musician", async () => {
         const response = await request(app)
             .put("/musicians/4")
